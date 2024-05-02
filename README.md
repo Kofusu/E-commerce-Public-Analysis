@@ -1,3 +1,7 @@
+# Analysis Projects with E-Commerce Public Dataset
+
+## Background
+
 ### Context
 This dataset was generously provided by Olist, the largest department store in Brazilian marketplaces. Olist connects small businesses from all over Brazil to channels without hassle and with a single contract. Those merchants are able to sell their products through the Olist Store and ship them directly to the customers using Olist logistics partners. See more on our website: [www.olist.com](www.olist.com)
 
@@ -16,3 +20,11 @@ After a customer purchases the product from Olist Store a seller gets notified t
 
 ### Data Schema
 ![Data Schema](data_schema.png)
+
+## Installation
+```cli
+$ pip install streamlit
+```
+```cli
+$ streamlit run dashboard/dashboard.py
+```
