@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 canceled_reviews_df = pd.read_csv("dashboard/canceled_reviews.csv")
-customers_geo_df = pd.read_csv("dashboard/customers_geo.csv")
+customers_df = pd.read_csv("dashboard/customers.csv")
 last_year_income_df = pd.read_csv("dashboard/last_year_income.csv")
 order_time_df = pd.read_csv("dashboard/order_time_diff.csv")
 products_df = pd.read_csv("dashboard/products_df.csv")
@@ -20,10 +20,11 @@ st.write('''
 # ----------------------------
 
 st.metric(label="Total Income", value=f"{last_year_income_df['payment_value'].sum()} R$")
+
 # ----------------------------
 
 st.write('''
-         ## Delivery Days
+         ## Delivery Days Totals
          ''')
 
 days_arrive = order_time_df
@@ -41,3 +42,19 @@ st.write('''
          ''')
 
 st.dataframe(data=canceled_reviews_df[['review_comment_title', 'review_comment_message']], width=900)
+
+# ----------------------------
+
+col1, col2 = st.columns(2)
+
+with col1:
+  st.header("Top Customer City")
+  fig, ax = plt.subplots(figsize=(14, 8))
+  ax = customers_df['customer_city'].value_counts().sort_values(ascending=False).head().plot(kind='barh')
+  st.pyplot(fig)
+
+with col2:
+  st.header("Top Customer State")
+  fig, ax = plt.subplots(figsize=(14, 8))
+  ax = customers_df['customer_state'].value_counts().sort_values(ascending=False).head().plot(kind='barh')
+  st.pyplot(fig)
