@@ -21,6 +21,12 @@ st.write('''
 
 st.metric(label="Total Income", value=f"{last_year_income_df['payment_value'].sum()} R$")
 
+fig, ax = plt.subplots(figsize=(10, 6))
+ax = last_year_income_df['payment_value'].plot(kind='line')
+st.pyplot(fig)
+
+st.dataframe(last_year_income_df['payment_value'].describe(), width=900)
+
 # ----------------------------
 
 st.write('''
@@ -43,6 +49,16 @@ st.write('''
 
 st.dataframe(data=canceled_reviews_df[['review_comment_title', 'review_comment_message']], width=900)
 
+fig, ax = plt.subplots(figsize=(10, 6))
+ax = canceled_reviews_df['review_score'].value_counts().sort_index().plot(kind='bar')
+st.pyplot(fig)
+
+# ----------------------------
+
+fig, ax = plt.subplots(figsize=(10, 6))
+ax = products_df['product_category_name_english'].value_counts().head(10).plot(kind='bar')
+st.pyplot(fig)
+
 # ----------------------------
 
 col1, col2 = st.columns(2)
@@ -58,3 +74,8 @@ with col2:
   fig, ax = plt.subplots(figsize=(14, 8))
   ax = customers_df['customer_state'].value_counts().sort_values(ascending=False).head().plot(kind='barh')
   st.pyplot(fig)
+
+with st.sidebar:
+  st.write('''
+            input under construction :)
+           ''')
